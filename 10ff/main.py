@@ -3,7 +3,7 @@ import asyncio
 import argparse
 import pathlib
 
-from .game import Game
+from game import Game
 
 DEFAULT_TIME = 60
 
