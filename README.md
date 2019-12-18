@@ -8,10 +8,9 @@ tracking and 10 megabytes of AJAX crap.
 
 ![](https://raw.githubusercontent.com/rr-/10ff/blob/example.gif)
 
-#### Installation
+#### Running
 
 ```
-git clone https://github.com/rr-/10ff
-cd 10ff
-pip install --user .
+git clone https://github.com/pspslimboy/10ff
+python 10ff/main.py
 ```
