@@ -9,7 +9,7 @@ from .util import divide_lines
 
 MAX_COLUMNS = min(shutil.get_terminal_size().columns, 80)
 MAX_LINES = 2
-SAMPLE_SIZE = 1000
+SAMPLE_SIZE = 10000
 WORD_LENGTH = 5
 
 STATUS_UNTYPED = 0
