@@ -229,7 +229,7 @@ late
 man
 run
 year
-don\t
+don't
 came
 while
 show
