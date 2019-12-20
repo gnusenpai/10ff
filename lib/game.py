@@ -236,7 +236,8 @@ class Game:
             elif key == '\x08':
                 state.wordbackspace_pressed()
             elif re.match(r'\s', key):
-                state.word_finished()
+                if state._text_input != '':
+                    state.word_finished()
             else:
                 state.key_pressed(key)
 
