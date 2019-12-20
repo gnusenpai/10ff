@@ -12,5 +12,5 @@ tracking and 10 megabytes of AJAX crap.
 
 ```
 git clone https://github.com/pspslimboy/10ff
-python 10ff/main.py
+python3 10ff/main.py
 ```
