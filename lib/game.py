@@ -140,6 +140,11 @@ class GameState:
         self._current_word_keys_pressed += 1
         self._update_typing_status()
 
+    def wordbackspace_pressed(self):
+        self._text_input = ''
+        self._current_word_keys_pressed += 1
+        self._update_typing_status()
+
     def key_pressed(self, key):
         self._text_input += key
         self._current_word_keys_pressed += 1
@@ -228,6 +233,8 @@ class Game:
                 state.finish()
             elif key == '\x7F':
                 state.backspace_pressed()
+            elif key == '\x08':
+                state.wordbackspace_pressed()
             elif re.match(r'\s', key):
                 state.word_finished()
             else:
