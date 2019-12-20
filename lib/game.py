@@ -184,11 +184,13 @@ class GameState:
 
 
 class Game:
-    def __init__(self, loop, args):
+    def __init__(self, loop, args, path):
+        corpus_file = args.corpus_name + '.txt'
+        corpus_path = path / 'data' / corpus_file
         corpus = [
             word
             for word in re.split(
-                r'\s+', args.corpus_path.read_text(encoding='utf-8')
+                r'\s+', corpus_path.read_text(encoding='utf-8')
             )
             if word
         ]
