@@ -55,6 +55,12 @@ def parse_args():
         action="store_true",
         help="treat double space as error",
     )
+    parser.add_argument(
+        "-i",
+        "--instadeath",
+        action="store_true",
+        help="enable instadeath mode"
+    )
     return parser.parse_args()
 
 
@@ -70,7 +76,7 @@ def main():
 
     corpus_path = get_corpus_path(args.corpus)
 
-    game = Game(loop, corpus_path, args.time, args.rigorous_spaces)
+    game = Game(loop, corpus_path, args.time, args.rigorous_spaces, args.instadeath)
     loop.run_until_complete(game.run())
     loop.close()
 

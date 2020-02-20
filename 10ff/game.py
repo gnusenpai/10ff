@@ -20,7 +20,7 @@ STATUS_TYPED_WRONG = 4
 
 
 class GameState:
-    def __init__(self, words, max_time):
+    def __init__(self, words, max_time, instadeath):
         self._words = words
         self._current_word = 0
         self._text_input = ""
@@ -34,6 +34,7 @@ class GameState:
         self._keys_pressed = 0
         self._current_word_keys_pressed = 0
         self._first_render = True
+        self._instadeath = instadeath
 
     @property
     def finished(self):
@@ -177,15 +178,22 @@ class GameState:
             self.finish()
 
     def _update_typing_status(self):
-        self._status[self._current_word] = (
-            STATUS_TYPING_WELL
-            if self._words[self._current_word].startswith(self._text_input)
-            else STATUS_TYPING_WRONG
-        )
+        if self._instadeath:
+            self._status[self._current_word] = (
+                STATUS_TYPING_WELL
+                if self._words[self._current_word].startswith(self._text_input)
+                else self.finish()
+            )
+        else:
+            self._status[self._current_word] = (
+                STATUS_TYPING_WELL
+                if self._words[self._current_word].startswith(self._text_input)
+                else STATUS_TYPING_WRONG
+            )
 
 
 class Game:
-    def __init__(self, loop, corpus_path, max_time, rigorous_spaces):
+    def __init__(self, loop, corpus_path, max_time, rigorous_spaces, instadeath):
         corpus = [
             word
             for word in re.split(
@@ -197,13 +205,14 @@ class Game:
         self._max_time = max_time
         self._text = [random.choice(corpus) for _ in range(SAMPLE_SIZE)]
         self._rigorous_spaces = rigorous_spaces
+        self._instadeath = instadeath
 
         self._loop = loop
         self._raw_terminal = RawTerminal(loop)
         self._raw_terminal.enable()
 
     async def run(self):
-        state = GameState(self._text, self._max_time)
+        state = GameState(self._text, self._max_time, self._instadeath)
 
         async def timer():
             while not state.finished:
